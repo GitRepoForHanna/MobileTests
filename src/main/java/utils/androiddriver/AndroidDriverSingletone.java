@@ -1,0 +1,63 @@
+package utils.androiddriver;
+
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
+
+public class AndroidDriverSingletone {
+
+    private static AndroidDriverSingletone instance;
+    private AndroidDriver<MobileElement> driver;
+
+
+    public AndroidDriver<MobileElement> initDriver() {
+        Logger.getLogger(AndroidDriverSingletone.class).info("Init AndroidDriver");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("deviceName", "Pixel 2 API 28");
+        capabilities.setCapability("udid", "emulator-5554");
+        capabilities.setCapability("platformName", "Android");
+        capabilities.setCapability("platformVersion", "9.0");
+        capabilities.setCapability("appPackage", "com.socialnmobile.dictapps.notepad.color.note");
+        capabilities.setCapability("app","C:\\HannasWorkshop\\mobApps\\TestApp.apk");
+        try {
+            driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        }
+        catch (MalformedURLException ex) {
+            Logger.getLogger(AndroidDriverSingletone.class).info("MalformedURLException exception was caught \n" + ex.getMessage());
+        }
+        return driver;
+    }
+
+    private AndroidDriverSingletone() {
+        initDriver();
+    }
+
+    public static AndroidDriverSingletone getSingletoneInstance() {
+        Logger.getLogger(AndroidDriverSingletone.class).info("Get AndroidDriverSingletone instance");
+        if(null == instance){
+            instance = new AndroidDriverSingletone();
+        }
+        return instance;
+    }
+
+    public AndroidDriver<MobileElement> getDriverInstance() {
+        if(null == driver) {
+            initDriver();
+        }
+        return driver;
+    }
+
+    public void closeDriver() {
+        driver.closeApp();
+        driver.runAppInBackground(Duration.ofSeconds(1));
+    }
+
+    public void resetApp() {
+        driver.resetApp();
+    }
+}
