@@ -12,10 +12,10 @@ import java.time.Duration;
 public class AndroidDriverSingletone {
 
     private static AndroidDriverSingletone instance;
-    private AndroidDriver<MobileElement> driver;
+    private AndroidDriver driver;
 
 
-    public AndroidDriver<MobileElement> initDriver() {
+    public AndroidDriver initDriver() {
         Logger.getLogger(AndroidDriverSingletone.class).info("Init AndroidDriver");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", "Pixel 2 API 28");
@@ -24,8 +24,9 @@ public class AndroidDriverSingletone {
         capabilities.setCapability("platformVersion", "9.0");
         capabilities.setCapability("appPackage", "com.socialnmobile.dictapps.notepad.color.note");
         capabilities.setCapability("app","C:\\HannasWorkshop\\mobApps\\TestApp.apk");
+        capabilities.setCapability("newCommandTimeout",7200);
         try {
-            driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+            driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         }
         catch (MalformedURLException ex) {
             Logger.getLogger(AndroidDriverSingletone.class).info("MalformedURLException exception was caught \n" + ex.getMessage());

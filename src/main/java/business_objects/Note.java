@@ -5,6 +5,14 @@ public class Note {
     private String name;
     private NoteType type;
     private Color color = Color.YELLOW;
+    private Body body;
+
+    protected Note(String name, NoteType type, Color color, Body body) {
+        this.name = name;
+        this.type = type;
+        this.color = color;
+        this.body = body;
+    }
 
     protected Note(String name, NoteType type, Color color) {
         this.name = name;
@@ -13,6 +21,7 @@ public class Note {
     }
 
     protected Note(String name, NoteType type) {
+        super();
         this.name = name;
         this.type = type;
     }
@@ -39,5 +48,13 @@ public class Note {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
     }
 }

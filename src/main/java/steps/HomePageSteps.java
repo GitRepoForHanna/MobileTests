@@ -1,9 +1,9 @@
 package steps;
 
-import business_objects.Note;
-import business_objects.NoteType;
 import org.apache.log4j.Logger;
-import pages.*;
+import pages.BottomMenuPage;
+import pages.HomePage;
+import utils.wait.Wait;
 
 public class HomePageSteps extends BaseSteps {
 
@@ -11,33 +11,59 @@ public class HomePageSteps extends BaseSteps {
         new HomePage().clickNewNoteButton();
         Logger.getLogger(HomePageSteps.class).info("Click New Note Button");
     }
-
-    public void createNewNote(Note note) {
-        NotePage newNotePage;
-        Logger logger = Logger.getLogger(HomePageSteps.class);
-        HomePage homePage = new HomePage();
-        NoteTypePopup typePopup = new NoteTypePopup();
-
-        homePage.clickNewNoteButton();
-        logger.info("Click New Note Button");
-
-        typePopup.setNoteType(note.getType());
-        logger.info(String.format("Note type %s is selected", note.getType()));
-
-        if(note.getType().getValue().equals(NoteType.CHECKLIST.getValue())){
-            //newNotePage = new ();
-        }
-        else {
-            newNotePage = new TextNotePage();
-            newNotePage.setNoteData(note);
-        }
-
+    public int getNotesCount() {
+        return new HomePage().getNoteElements().size();
     }
 
-    public void createNoteAndBack(Note note) {
+    public void clickArchiveInBottomMenu() {
+        BottomMenuPage menuPage = new BottomMenuPage();
+        Wait.waitUntilParticularState(menuPage::isDisplayed);
+        menuPage.clickArchiveButton();
+        Logger.getLogger(HomePageSteps.class).info("Click Archive Button in Bottom Menu");
+    }
 
-        createNewNote(note);
-        Logger.getLogger(HomePageSteps.class).info("Go back");
+    public void clickDeleteInBottomMenu() {
+        BottomMenuPage menuPage = new BottomMenuPage();
+        Wait.waitUntilParticularState(menuPage::isDisplayed);
+        menuPage.clickDeleteButton();
+        Logger.getLogger(HomePageSteps.class).info("Click Delete Button in Bottom Menu");
+    }
 
+    public void clickColorInBottomMenu() {
+        BottomMenuPage menuPage = new BottomMenuPage();
+        Wait.waitUntilParticularState(menuPage::isDisplayed);
+        menuPage.clickColorButton();
+        Logger.getLogger(HomePageSteps.class).info("Click Color Button in Bottom Menu");
+    }
+
+    public void clickReminderInBottomMenu() {
+        BottomMenuPage menuPage = new BottomMenuPage();
+        Wait.waitUntilParticularState(menuPage::isDisplayed);
+        menuPage.clickReminderButton();
+        Logger.getLogger(HomePageSteps.class).info("Click Reminder Button in Bottom Menu");
+    }
+
+    public void clickMoreInBottomMenu() {
+        BottomMenuPage menuPage = new BottomMenuPage();
+        Wait.waitUntilParticularState(menuPage::isDisplayed);
+        menuPage.clickMoreButton();
+        Logger.getLogger(HomePageSteps.class).info("Click More Button in Bottom Menu");
+    }
+
+    public void clickNoteWithText(String noteTitle) {
+        new HomePage().clickNoteWithText(noteTitle);
+        Logger.getLogger(HomePageSteps.class).info(String.format("Click Note with text %s", noteTitle));
+    }
+
+    public void clickAndHoldNoteWithText(String noteTitle) {
+        new HomePage().clickAndHoldNoteWithText(noteTitle);
+        Logger.getLogger(HomePageSteps.class).info(String.format("Click and hold Note with text %s", noteTitle));
+    }
+
+    public void deleteNote(String noteTitle) {
+        HomePage homePage = new HomePage();
+        homePage.clickAndHoldNoteWithText(noteTitle);
+        clickDeleteInBottomMenu();
+        clickOkButton();
     }
 }

@@ -1,13 +1,16 @@
 package pages;
 
-import business_objects.Color;
-import business_objects.Note;
-import business_objects.TextNote;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.androiddriver.AndroidDriverSingletone;
 import utils.wait.Wait;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class TextNotePage extends NotePage {
 
@@ -19,28 +22,14 @@ public class TextNotePage extends NotePage {
     }
 
     public void setBody(String body) {
-        Wait.waitUntilParticularState(bodyInput::isEnabled);
+        Wait.waitUntilParticularState(bodyInput::isDisplayed);
         bodyInput.sendKeys(body);
+        Logger.getLogger(TextNotePage.class).info("Set Body");
     }
 
-    @Override
-    public void setNoteData(Note note) {
-        TextNote textNote = ((TextNote) note);
-
-        String title = textNote.getName();
-        if (title != null) {
-            setTitle(title);
-        }
-        String body = textNote.getBody();
-        if (body != null) {
-            setBody(body);
-        }
-        Color color = textNote.getColor();
-        if (color != null && !(color.equals(Color.YELLOW))) {
-            ColorPopup colorPopup = new ColorPopup();
-            clickColorButton();
-            colorPopup.clickColorButton(color);
-        }
-        clickSaveButton();
+    public List<String> getBody() {
+        Wait.waitUntilParticularState(bodyInput::isDisplayed);
+        String bodyContent = bodyInput.getText();
+        return StringUtils.isNotBlank(bodyContent) ? Arrays.asList(bodyContent) : Collections.EMPTY_LIST;
     }
 }

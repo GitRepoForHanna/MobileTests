@@ -1,14 +1,16 @@
-package pages;
+package popups;
 
 import business_objects.NoteType;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.BasePage;
 import utils.androiddriver.AndroidDriverSingletone;
 import utils.wait.Wait;
 
-public class NoteTypePopup extends BasePage{
+public class NoteTypePopup extends BasePage {
 
     @FindBy(id = "android:id/parentPanel")
     private WebElement noteTypePopupPanel;
@@ -21,7 +23,7 @@ public class NoteTypePopup extends BasePage{
         PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
     }
 
-    public WebElement getTypeButton(String type) {
+    protected WebElement getTypeButton(String type) {
         return AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElement(By.xpath(String.format(typeButtonXpathPattern, type)));
     }
 
@@ -42,5 +44,6 @@ public class NoteTypePopup extends BasePage{
         Wait.waitUntilParticularState(this::isPopupDisplayed);
         clickNoteTypeButton(type.getValue());
         Wait.waitUntilParticularState(() -> !isPopupDisplayed());
+        Logger.getLogger(NoteTypePopup.class).info(String.format("Note type %s selected", type.getValue()));
     }
 }

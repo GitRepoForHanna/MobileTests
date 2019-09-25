@@ -1,19 +1,20 @@
-package pages;
+package popups;
 
 import business_objects.Color;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.BasePage;
 import utils.androiddriver.AndroidDriverSingletone;
 import utils.wait.Wait;
 
 public class ColorPopup extends BasePage {
 
-    @FindBy(id = "com.socialnmobile.dictapps.notepad.color.note:id/layout")
-    private WebElement colorPanel;
+    @FindBy(id = "com.socialnmobile.dictapps.notepad.color.note:id/btn1")
+    private WebElement colorButton;
 
-    private String colorPanelId = "com.socialnmobile.dictapps.notepad.color.note:id/layout";
+    private String colorButtonId = "com.socialnmobile.dictapps.notepad.color.note:id/btn1";
 
     public ColorPopup() {
         PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
@@ -25,15 +26,15 @@ public class ColorPopup extends BasePage {
 
     public void clickColorButton(Color color) {
         WebElement button = getColorButton(color);
-        Wait.waitUntilParticularState(button::isEnabled);
+        Wait.waitUntilParticularState(button::isDisplayed);
         button.click();
     }
 
     public boolean isPopupDisplayed() {
-        if (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(colorPanelId)).size() == 0) {
+        if (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(colorButtonId)).size() == 0) {
             return false;
         }
-        return colorPanel.isDisplayed();
+        return colorButton.isDisplayed();
     }
 
     public void setColor(Color color) {
