@@ -10,9 +10,6 @@ public class Body {
         this.contentItems = contentItems;
     }
 
-    public Body() {
-    }
-
     public List<String> getContentItems() {
         return contentItems;
     }
