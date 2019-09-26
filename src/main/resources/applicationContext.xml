@@ -12,5 +12,5 @@
     <bean id="homePageSteps" class="steps.HomePageSteps"/>
     <bean id="noteTypePopupSteps" class="steps.NoteTypePopupSteps"/>
 <!--    <bean id="noteTypePopupSteps" class="steps.NoteTypePopupSteps"/>-->
-    <bean id="textNotePageSteps" class="steps.TextNotePageSteps"/>
+
 </beans>

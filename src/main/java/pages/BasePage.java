@@ -1,4 +1,6 @@
 package pages;
 
-public class BasePage {
+public abstract class BasePage {
+
+    protected String resourceIdXPathPattern = "//*[@resource-id='%s']";
 }

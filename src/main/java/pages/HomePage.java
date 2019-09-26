@@ -1,10 +1,18 @@
 package pages;
 
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.androiddriver.AndroidDriverSingletone;
+import utils.element_utils.ElementUtils;
 import utils.wait.Wait;
+
+import java.time.Duration;
+import java.util.List;
 
 public class HomePage extends BasePage {
 
@@ -22,6 +30,11 @@ public class HomePage extends BasePage {
 
     @FindBy(id = "com.socialnmobile.dictapps.notepad.color.note:id/img_add")
     private WebElement addNoteImage;
+
+    @FindBy(id = "com.socialnmobile.dictapps.notepad.color.note:id/note_list")
+    private WebElement notesListPanel;
+
+    private String noteXPathPattern = "//android.widget.RelativeLayout//android.widget.TextView[@resource-id='com.socialnmobile.dictapps.notepad.color.note:id/title']";
 
 
     public HomePage() {
@@ -51,6 +64,31 @@ public class HomePage extends BasePage {
     public void clickSortByTimeButton() {
         Wait.waitUntilParticularState(() -> sortByTimeButton.isDisplayed());
         sortByTimeButton.click();
+    }
+
+    public List<WebElement> getNoteElements() {
+        Wait.waitUntilParticularState(notesListPanel::isDisplayed);
+        return notesListPanel.findElements(By.xpath(noteXPathPattern));
+    }
+
+    public WebElement getNoteElement(String noteTitle) {
+        return getNoteElements().stream()
+                .filter(e -> e.getText().trim().equals(noteTitle))
+                .findFirst()
+                .get();
+    }
+
+    public void clickNoteWithText(String noteTitle) {
+        getNoteElement(noteTitle).click();
+    }
+
+    public void clickAndHoldNoteWithText(String noteTitle) {
+        WebElement element = getNoteElement(noteTitle);
+        PointOption pointOption  = ElementUtils.getCenterElementPointOption(element);
+        new TouchAction(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance()).press(pointOption)
+                .waitAction(new WaitOptions().withDuration(Duration.ofSeconds(3)))
+                .release()
+                .perform();
     }
 
 }
