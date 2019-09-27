@@ -8,11 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.androiddriver.AndroidDriverSingletone;
-import utils.element_utils.ElementUtils;
+import utils.elements.ElementUtils;
 import utils.wait.Wait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
 public class HomePage extends BasePage {
 
@@ -72,10 +73,10 @@ public class HomePage extends BasePage {
     }
 
     public WebElement getNoteElement(String noteTitle) {
-        return getNoteElements().stream()
-                .filter(e -> e.getText().trim().equals(noteTitle))
-                .findFirst()
-                .get();
+        Optional elementPresence = notesListPanel.findElements(By.xpath(noteXPathPattern)).stream()
+                .filter(noteElement -> noteElement.getText().trim().equals(noteTitle))
+                .findAny();
+        return elementPresence.isPresent() ? (WebElement) elementPresence.get() : null;
     }
 
     public void clickNoteWithText(String noteTitle) {
@@ -86,7 +87,7 @@ public class HomePage extends BasePage {
         WebElement element = getNoteElement(noteTitle);
         PointOption pointOption  = ElementUtils.getCenterElementPointOption(element);
         new TouchAction(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance()).press(pointOption)
-                .waitAction(new WaitOptions().withDuration(Duration.ofSeconds(3)))
+                .waitAction(new WaitOptions().withDuration(Duration.ofSeconds(DEFAULT_HOLD_TIMEOUT)))
                 .release()
                 .perform();
     }

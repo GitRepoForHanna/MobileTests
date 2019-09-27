@@ -1,6 +1,5 @@
 package pages;
 
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,6 +35,12 @@ public class NotePage extends BasePage {
         Wait.waitUntilParticularState(titleInput::isEnabled);
         titleInput.sendKeys(title);
         Logger.getLogger(NotePage.class).info(String.format("Set note title %s", title));
+    }
+
+    public void clearTitle() {
+        Wait.waitUntilParticularState(titleInput::isEnabled);
+        titleInput.clear();
+        Logger.getLogger(NotePage.class).info("Note title is cleared");
     }
 
     public void clickSaveButton() {

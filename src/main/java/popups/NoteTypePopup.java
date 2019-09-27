@@ -15,7 +15,7 @@ public class NoteTypePopup extends BasePage {
     @FindBy(id = "android:id/parentPanel")
     private WebElement noteTypePopupPanel;
 
-    private String noteTypePopupPanelId = "android:id/parentPanel";
+    public static final String NOTE_TYPE_POPUP_PANEL_ID = "android:id/parentPanel";
 
     private String typeButtonXpathPattern = "//android.widget.TextView[@text='%s']";
 
@@ -23,7 +23,7 @@ public class NoteTypePopup extends BasePage {
         PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
     }
 
-    protected WebElement getTypeButton(String type) {
+    private WebElement getTypeButton(String type) {
         return AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElement(By.xpath(String.format(typeButtonXpathPattern, type)));
     }
 
@@ -34,10 +34,7 @@ public class NoteTypePopup extends BasePage {
     }
 
     public boolean isPopupDisplayed() {
-        if (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(noteTypePopupPanelId)).size() == 0) {
-            return false;
-        }
-        return noteTypePopupPanel.isDisplayed();
+        return (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(NOTE_TYPE_POPUP_PANEL_ID)).size() != 0) && noteTypePopupPanel.isDisplayed();
     }
 
     public void setNoteType(NoteType type) {

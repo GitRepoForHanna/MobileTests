@@ -3,6 +3,7 @@ package steps;
 import business_objects.CheckListNote;
 import business_objects.Note;
 import business_objects.TextNote;
+import org.openqa.selenium.Keys;
 import pages.BasePage;
 import pages.ChecklistNotePage;
 import pages.NotePage;
@@ -10,7 +11,8 @@ import pages.TextNotePage;
 import popups.ColorPopup;
 import popups.NewChecklistItemPopup;
 
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class NotePageSteps extends BasePage {
@@ -19,14 +21,11 @@ public class NotePageSteps extends BasePage {
         switch (note.getType()) {
             case TEXT_NOTE: {
                 TextNote textNote = (TextNote) note;
-                Iterator iterator = textNote.getBody().getContentItems().iterator();
-                String body = "";
-                while (iterator.hasNext()){
-                    body += iterator.next();
-                }
-                if (body != null) {
-                    new TextNotePage().setBody(body);
-                }
+                textNote.getBody().getContentItems()
+                        .forEach( item -> {
+                            new TextNotePage().setBody(item);
+                            new TextNotePage().pressKey(Keys.ENTER);
+                        });
                 break;
             }
             case CHECKLIST: {
@@ -48,16 +47,28 @@ public class NotePageSteps extends BasePage {
         }
     }
 
+    public void clearTitle() {
+        new NotePage().clearTitle();
+    }
+
     public void setTitle(Note note) {
+        new NotePage().setTitle(note.getName());
+    }
+
+    public void updateTitle(Note note) {
         NotePage notePage = new NotePage();
+        notePage.clearTitle();
         notePage.setTitle(note.getName());
     }
 
-    public void setColor(Note note) {
+    public void clickColorButton() {
         NotePage notePage = new NotePage();
-        ColorPopup colorPopup = new ColorPopup();
         notePage.clickColorButton();
-        colorPopup.setColor(note.getColor());
+    }
+
+    public void setColor(Note note) {
+        clickColorButton();
+        new ColorPopup().setColor(note.getColor());
     }
 
     public void saveNote() {
@@ -90,7 +101,9 @@ public class NotePageSteps extends BasePage {
     public List<String> getNoteBody(Note note) {
         switch (note.getType()) {
             case TEXT_NOTE: {
-                return new TextNotePage().getBody();
+                TextNotePage textNotePage = new TextNotePage();
+                return (textNotePage.getBody().size() != 0) ? Arrays.asList(textNotePage.getBody().get(0).split("\n")) : Collections.emptyList();
+
             }
             case CHECKLIST: {
                 return new ChecklistNotePage().getCheckListItems();
@@ -98,9 +111,5 @@ public class NotePageSteps extends BasePage {
             default:
                 throw new RuntimeException("This note type doesn't exists!");
         }
-    }
-
-    public void assertBody(List<String> expectedBody) {
-
     }
 }

@@ -18,15 +18,4 @@ public class Body {
         this.contentItems = contentItems;
     }
 
-    public void addNewValue(String item) {
-        contentItems.add(item);
-    }
-
-    public void removeBodyItem(String itemToRemove){
-        String item = getContentItems().stream().filter(i -> i.trim().equals(itemToRemove))
-                .findFirst()
-                .get();
-        getContentItems().remove(item);
-    }
-
 }

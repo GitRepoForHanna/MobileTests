@@ -21,4 +21,9 @@ public class BaseEmulatorPageSteps extends BaseSteps{
         baseEmulatorPage.clickSkipButton();
         Logger.getLogger(BaseEmulatorPageSteps.class).info("Click Skip Details Button");
     }
+
+    public void preparationActivities() {
+        clickAllowAccess();
+        clickSkipButton();
+    }
 }

@@ -2,7 +2,9 @@ package pages;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.androiddriver.AndroidDriverSingletone;
@@ -23,8 +25,12 @@ public class TextNotePage extends NotePage {
 
     public void setBody(String body) {
         Wait.waitUntilParticularState(bodyInput::isDisplayed);
-        bodyInput.sendKeys(body);
+        new Actions(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance()).sendKeys(bodyInput, body).perform();
         Logger.getLogger(TextNotePage.class).info("Set Body");
+    }
+
+    public void pressKey(Keys key) {
+        new Actions(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance()).sendKeys(bodyInput, key).perform();
     }
 
     public List<String> getBody() {

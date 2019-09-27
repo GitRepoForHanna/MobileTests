@@ -14,7 +14,7 @@ public class ColorPopup extends BasePage {
     @FindBy(id = "com.socialnmobile.dictapps.notepad.color.note:id/btn1")
     private WebElement colorButton;
 
-    private String colorButtonId = "com.socialnmobile.dictapps.notepad.color.note:id/btn1";
+    private static final String COLOR_BUTTON_ID = "com.socialnmobile.dictapps.notepad.color.note:id/btn1";
 
     public ColorPopup() {
         PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
@@ -31,10 +31,7 @@ public class ColorPopup extends BasePage {
     }
 
     public boolean isPopupDisplayed() {
-        if (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(colorButtonId)).size() == 0) {
-            return false;
-        }
-        return colorButton.isDisplayed();
+        return (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(COLOR_BUTTON_ID)).size() != 0) && colorButton.isDisplayed();
     }
 
     public void setColor(Color color) {

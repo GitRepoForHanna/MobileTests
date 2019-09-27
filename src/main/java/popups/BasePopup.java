@@ -38,9 +38,6 @@ public class BasePopup {
     }
 
     public boolean isDisplayed() {
-        if (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(PARENT_PANEL_ID)).size() == 0) {
-            return false;
-        }
-        return parentPanel.isDisplayed();
+        return (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(PARENT_PANEL_ID)).size() != 0) && parentPanel.isDisplayed();
     }
 }

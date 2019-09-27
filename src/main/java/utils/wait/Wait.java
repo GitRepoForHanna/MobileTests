@@ -1,5 +1,6 @@
 package utils.wait;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.androiddriver.AndroidDriverSingletone;
@@ -20,7 +21,7 @@ public class Wait {
                     try {
                         return state.call();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Logger.getLogger(Wait.class).info("Waiting particular state...");
                     }
                     return false;
                 });

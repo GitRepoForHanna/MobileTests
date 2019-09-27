@@ -4,7 +4,7 @@ public class Note {
 
     private String name;
     private NoteType type;
-    private Color color = Color.YELLOW;
+    private Color color;
     private Body body;
 
     protected Note(String name, NoteType type, Color color, Body body) {
@@ -20,10 +20,17 @@ public class Note {
         this.color = color;
     }
 
-    protected Note(String name, NoteType type) {
-        super();
+    protected Note(String name, NoteType type, Body body) {
         this.name = name;
         this.type = type;
+        this.body = body;
+        this.color = Color.YELLOW;
+    }
+
+    protected Note(String name, NoteType type) {
+        this.name = name;
+        this.type = type;
+        this.color = Color.YELLOW;
     }
 
     public String getName() {

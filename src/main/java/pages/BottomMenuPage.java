@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import utils.androiddriver.AndroidDriverSingletone;
 import utils.wait.Wait;
 
-public class BottomMenuPage {
+public class BottomMenuPage extends BasePage {
 
     private static final String BOTTOM_MENU_ID = "com.socialnmobile.dictapps.notepad.color.note:id/bottom_menu_layout";
 
@@ -34,32 +34,35 @@ public class BottomMenuPage {
     }
 
     public boolean isDisplayed() {
-        if (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(BOTTOM_MENU_ID)).size() == 0)
-            return false;
-        return bottomMenu.isDisplayed();
+        return (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(BOTTOM_MENU_ID)).size() != 0) && bottomMenu.isDisplayed();
     }
 
     public void clickArchiveButton() {
+        Wait.waitUntilParticularState(this::isDisplayed);
         Wait.waitUntilParticularState(archiveButton::isEnabled);
         archiveButton.click();
     }
 
     public void clickDeleteButton() {
+        Wait.waitUntilParticularState(this::isDisplayed);
         Wait.waitUntilParticularState(deleteButton::isEnabled);
         deleteButton.click();
     }
 
     public void clickColorButton() {
+        Wait.waitUntilParticularState(this::isDisplayed);
         Wait.waitUntilParticularState(colorButton::isEnabled);
         colorButton.click();
     }
 
     public void clickReminderButton() {
+        Wait.waitUntilParticularState(this::isDisplayed);
         Wait.waitUntilParticularState(reminderButton::isEnabled);
         reminderButton.click();
     }
 
     public void clickMoreButton() {
+        Wait.waitUntilParticularState(this::isDisplayed);
         Wait.waitUntilParticularState(moreButton::isEnabled);
         moreButton.click();
     }

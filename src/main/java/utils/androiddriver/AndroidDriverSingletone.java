@@ -13,10 +13,10 @@ public class AndroidDriverSingletone {
 
     private static AndroidDriverSingletone instance;
     private AndroidDriver driver;
+    private static final String URL = "http://127.0.0.1:4723/wd/hub";
 
 
     public AndroidDriver initDriver() {
-        Logger.getLogger(AndroidDriverSingletone.class).info("Init AndroidDriver");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", "Pixel 2 API 28");
         capabilities.setCapability("udid", "emulator-5554");
@@ -26,7 +26,7 @@ public class AndroidDriverSingletone {
         capabilities.setCapability("app","C:\\HannasWorkshop\\mobApps\\TestApp.apk");
         capabilities.setCapability("newCommandTimeout",7200);
         try {
-            driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+            driver = new AndroidDriver<>(new URL(URL), capabilities);
         }
         catch (MalformedURLException ex) {
             Logger.getLogger(AndroidDriverSingletone.class).info("MalformedURLException exception was caught \n" + ex.getMessage());
@@ -39,7 +39,6 @@ public class AndroidDriverSingletone {
     }
 
     public static AndroidDriverSingletone getSingletoneInstance() {
-        Logger.getLogger(AndroidDriverSingletone.class).info("Get AndroidDriverSingletone instance");
         if(null == instance){
             instance = new AndroidDriverSingletone();
         }

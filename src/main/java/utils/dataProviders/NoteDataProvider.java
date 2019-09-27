@@ -10,8 +10,8 @@ public class NoteDataProvider {
     @DataProvider(name = "CreateNewNote")
     public static Object[] getNote() {
         return new Note[]{
-                new TextNote("Salad ingridients", new Body(Arrays.asList("Oil\nRed fish\nCheese\nLatook\nEggs"))),
-                new TextNote("Cake", Color.BLUE, new Body(Arrays.asList("Milk\n5 Eggs\nCreamy souse\n2Bananas\n500g Berries"))),
+                new TextNote("Salad ingridients", new Body(Arrays.asList("Oil", "Red fish", "Cheese", "Latook", "Eggs"))),
+                new TextNote("Cake", Color.BLUE, new Body(Arrays.asList("Milk", "5 Eggs", "Creamy souse", "2 Bananas", "500g Berries"))),
                 new CheckListNote("Books to read", new Body(Arrays.asList("Ivanhoe",
                         "Lost by the wind",
                         "Forsyte saga")))
@@ -21,15 +21,43 @@ public class NoteDataProvider {
     @DataProvider(name = "CreateTextNote")
     public static Object[] createTextNote() {
         return new Note[]{
-                new TextNote("Books to read", new Body(Arrays.asList("Lost by the wind\nForsyte saga\nIvanhoe")))
+                new TextNote("Books to read", new Body(Arrays.asList("Lost by the wind", "Forsyte saga", "Ivanhoe")))
         };
     }
 
     @DataProvider(name = "Note_Editing")
-    public static Object[] createChecklistNote() {
+    public static Object[] createNote() {
         return new Note[]{
-                    new TextNote("Books to read", new Body(Arrays.asList("Lost by the wind\nForsyte saga\nIvanhoe\n"))),
+                    new TextNote("Books to read", new Body(Arrays.asList("Lost by the wind"))),
                     new CheckListNote("Colors", new Body(Arrays.asList("Green")))
+        };
+    }
+
+    @DataProvider(name = "AppendingToNote")
+    public static Object[][] getDataForAppendingChecklistNote() {
+        return new Object[][]{
+                {
+                        new CheckListNote("Colors", new Body(Arrays.asList("Green"))),
+                        new CheckListNote("Colors", new Body(Arrays.asList("Red")))
+                },
+                {
+                        new TextNote("Books to read", new Body(Arrays.asList("Lost by the wind","Forsyte saga","Ivanhoe"))),
+                        new TextNote("Books to read", new Body(Arrays.asList("Jain Eyre")))
+                }
+        };
+    }
+
+    @DataProvider(name = "EditNoteTitle")
+    public static Object[] getDataForTitleEditiong() {
+        return new Note[][]{
+                {
+                    new TextNote("Books to read", new Body(Arrays.asList("Lost by the wind", "Forsyte saga", "Ivanhoe"))),
+                    new TextNote("My favority books")
+                },
+                {
+                    new CheckListNote("Colors", new Body(Arrays.asList("Green"))),
+                    new CheckListNote("My favorite colors")
+                }
         };
     }
 

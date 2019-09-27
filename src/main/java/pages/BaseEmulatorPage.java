@@ -10,7 +10,6 @@ public class BaseEmulatorPage {
 
     @FindBy(id = "com.android.packageinstaller:id/permission_allow_button")
     private WebElement allowAccessButton;
-
     @FindBy(id = "com.socialnmobile.dictapps.notepad.color.note:id/btn_start_skip")
     private WebElement skipButton;
 
