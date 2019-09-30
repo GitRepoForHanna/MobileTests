@@ -54,12 +54,13 @@ public class NotePage extends BasePage {
     public void updateTitle(String previousTitle, String newTitle) {
         Wait.waitUntilParticularState(titleInput::isEnabled);
         String difference = NoteUtils.getDifferenceBetweenNoteData(previousTitle, newTitle);
-        int indexToInsert = newTitle.indexOf(difference);
+        int indexToInsert = newTitle.toLowerCase().indexOf(difference);
         if ((indexToInsert == 0)) {
             ElementUtils.placeCursorToBeginningOfInput(titleInput);
             ElementUtils.pressKey(titleInput, Keys.DELETE);
             DriverUtils.getActions().sendKeys(previousTitle.substring(0, 1).toLowerCase()).perform();
             ElementUtils.pressKey(titleInput, Keys.ARROW_LEFT);
+            difference = difference.substring(0, 1).toUpperCase() + difference.substring(1);
         } else {
             ElementUtils.placeCursorToEndOfInput(titleInput);
         }

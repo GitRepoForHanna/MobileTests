@@ -70,11 +70,7 @@ public class NoteDataProvider {
                 },
                 {
                         new TextNote("Books", new Body(Arrays.asList("Lost by the wind", "Forsyte saga", "Ivanhoe"))),
-                        new TextNote("My favorite Books")
-                },
-                {
-                        new TextNote("Colors", new Body(Arrays.asList("Lost by the wind", "Forsyte saga", "Ivanhoe"))),
-                        new TextNote("My favorite colors")
+                        new TextNote("My favorite books")
                 }
         };
     }
