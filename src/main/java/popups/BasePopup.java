@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.BasePage;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
 public class BasePopup extends BasePage {
@@ -23,7 +24,7 @@ public class BasePopup extends BasePage {
     private WebElement okButton;
 
     public BasePopup() {
-        PageFactory.initElements(getAndroidDriver(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public void clickCancelButton() {

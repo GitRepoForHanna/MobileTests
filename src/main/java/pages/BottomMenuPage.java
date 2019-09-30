@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
 public class BottomMenuPage extends BasePage {
@@ -28,7 +29,7 @@ public class BottomMenuPage extends BasePage {
     private WebElement moreButton;
 
     public BottomMenuPage() {
-        PageFactory.initElements(getAndroidDriver(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public boolean isDisplayed() {

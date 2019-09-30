@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.BasePage;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
 public class NoteTypePopup extends BasePage {
@@ -18,7 +19,7 @@ public class NoteTypePopup extends BasePage {
     private String typeButtonXpathPattern = "//android.widget.TextView[@text='%s']";
 
     public NoteTypePopup() {
-        PageFactory.initElements(getAndroidDriver(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     private WebElement getTypeButton(String type) {

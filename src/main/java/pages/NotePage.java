@@ -1,11 +1,12 @@
 package pages;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.NoteUtils;
+import utils.androiddriver.DriverUtils;
 import utils.elements.ElementUtils;
 import utils.wait.Wait;
 
@@ -30,7 +31,7 @@ public class NotePage extends BasePage {
     protected WebElement redoButton;
 
     public NotePage() {
-        PageFactory.initElements(getAndroidDriver(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public void setTitle(String title) {
@@ -52,14 +53,17 @@ public class NotePage extends BasePage {
 
     public void updateTitle(String previousTitle, String newTitle) {
         Wait.waitUntilParticularState(titleInput::isEnabled);
-        String difference = NoteUtils.updateNoteData(previousTitle, newTitle);
+        String difference = NoteUtils.getDifferenceBetweenNoteData(previousTitle, newTitle);
         int indexToInsert = newTitle.indexOf(difference);
         if ((indexToInsert == 0)) {
-            ElementUtils.putCursorToStart(titleInput);
+            ElementUtils.placeCursorToBeginningOfInput(titleInput);
+            ElementUtils.pressKey(titleInput, Keys.DELETE);
+            DriverUtils.getActions().sendKeys(previousTitle.substring(0, 1).toLowerCase()).perform();
+            ElementUtils.pressKey(titleInput, Keys.ARROW_LEFT);
         } else {
-            ElementUtils.putCursorToEnd(titleInput);
+            ElementUtils.placeCursorToEndOfInput(titleInput);
         }
-        new Actions(getAndroidDriver()).sendKeys(difference).perform();
+        DriverUtils.getActions().sendKeys(difference).perform();
         Logger.getLogger(NotePage.class).info(String.format("Title is updated with '%s' string", difference));
     }
 

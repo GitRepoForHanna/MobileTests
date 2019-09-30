@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
 public class BaseEmulatorPage extends BasePage{
@@ -13,7 +14,7 @@ public class BaseEmulatorPage extends BasePage{
     private WebElement skipButton;
 
     public BaseEmulatorPage() {
-        PageFactory.initElements(getAndroidDriver(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public void clickAllowAccess() {

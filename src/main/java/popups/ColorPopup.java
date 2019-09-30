@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.BasePage;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
 public class ColorPopup extends BasePage {
@@ -15,7 +16,7 @@ public class ColorPopup extends BasePage {
     private static final String COLOR_BUTTON_ID = "com.socialnmobile.dictapps.notepad.color.note:id/btn1";
 
     public ColorPopup() {
-        PageFactory.initElements(getAndroidDriver(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     private WebElement getColorButton(Color color) {

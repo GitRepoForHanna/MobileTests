@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ChecklistNotePage extends NotePage {
     private String checklistItemXPathPattern = "//android.widget.RelativeLayout//android.widget.TextView[@text='%s']";
 
     public ChecklistNotePage() {
-        PageFactory.initElements(getAndroidDriver(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public void clickNewItem() {
