@@ -2,12 +2,10 @@ package popups;
 
 import business_objects.NoteType;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.BasePage;
-import utils.androiddriver.AndroidDriverSingletone;
 import utils.wait.Wait;
 
 public class NoteTypePopup extends BasePage {
@@ -20,11 +18,11 @@ public class NoteTypePopup extends BasePage {
     private String typeButtonXpathPattern = "//android.widget.TextView[@text='%s']";
 
     public NoteTypePopup() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(getAndroidDriver(), this);
     }
 
     private WebElement getTypeButton(String type) {
-        return AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElement(By.xpath(String.format(typeButtonXpathPattern, type)));
+        return findElementByXpath((String.format(typeButtonXpathPattern, type)));
     }
 
     public void clickNoteTypeButton(String type) {
@@ -34,7 +32,7 @@ public class NoteTypePopup extends BasePage {
     }
 
     public boolean isPopupDisplayed() {
-        return (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(NOTE_TYPE_POPUP_PANEL_ID)).size() != 0) && noteTypePopupPanel.isDisplayed();
+        return (findElementsById(NOTE_TYPE_POPUP_PANEL_ID).size() != 0) && noteTypePopupPanel.isDisplayed();
     }
 
     public void setNoteType(NoteType type) {

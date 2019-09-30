@@ -48,7 +48,7 @@ public class NoteDataProvider {
     }
 
     @DataProvider(name = "EditNoteTitle")
-    public static Object[] getDataForTitleEditiong() {
+    public static Object[] getDataForTitleEditing() {
         return new Note[][]{
                 {
                     new TextNote("Books to read", new Body(Arrays.asList("Lost by the wind", "Forsyte saga", "Ivanhoe"))),
@@ -57,6 +57,20 @@ public class NoteDataProvider {
                 {
                     new CheckListNote("Colors", new Body(Arrays.asList("Green"))),
                     new CheckListNote("My favorite colors")
+                }
+        };
+    }
+
+    @DataProvider(name = "UpdateNoteTitle")
+    public static Object[] getDataForTitleChanging() {
+        return new Note[][]{
+                {
+                        new TextNote("Books", new Body(Arrays.asList("Lost by the wind", "Forsyte saga", "Ivanhoe"))),
+                        new TextNote("Books to read")
+                },
+                {
+                        new TextNote("Books", new Body(Arrays.asList("Lost by the wind", "Forsyte saga", "Ivanhoe"))),
+                        new TextNote("My favorite Books")
                 }
         };
     }

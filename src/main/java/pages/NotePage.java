@@ -2,9 +2,10 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.androiddriver.AndroidDriverSingletone;
+import utils.NoteUtils;
 import utils.wait.Wait;
 
 public class NotePage extends BasePage {
@@ -28,7 +29,7 @@ public class NotePage extends BasePage {
     protected WebElement redoButton;
 
     public NotePage() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(getAndroidDriver(), this);
     }
 
     public void setTitle(String title) {
@@ -41,6 +42,24 @@ public class NotePage extends BasePage {
         Wait.waitUntilParticularState(titleInput::isEnabled);
         titleInput.clear();
         Logger.getLogger(NotePage.class).info("Note title is cleared");
+    }
+
+    public String getTitle() {
+        Wait.waitUntilParticularState(titleInput::isEnabled);
+        return titleInput.getText();
+    }
+
+    public void updateTitle(String previousTitle, String newTitle) {
+        Wait.waitUntilParticularState(titleInput::isEnabled);
+        String difference = NoteUtils.updateNoteData(previousTitle, newTitle);
+        int indexToInsert = newTitle.indexOf(difference);
+        if ((indexToInsert == 0)) {
+            putCursorToStart(titleInput);
+        } else {
+            putCursorToEnd(titleInput);
+        }
+        new Actions(getAndroidDriver()).sendKeys(difference).perform();
+        Logger.getLogger(NotePage.class).info(String.format("Title is updated with '%s' string", difference));
     }
 
     public void clickSaveButton() {

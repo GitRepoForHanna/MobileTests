@@ -3,7 +3,6 @@ import org.hamcrest.MatcherAssert;
 import org.testng.annotations.Test;
 import utils.androiddriver.AndroidDriverSingletone;
 import utils.dataProviders.NoteDataProvider;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +55,5 @@ public class UndoRedoScenarios extends BaseTest {
                 notePageSteps.getNoteBody(note), is(expectedNoteContent));
         AndroidDriverSingletone.getSingletoneInstance().resetApp();
     }
-
 }
 

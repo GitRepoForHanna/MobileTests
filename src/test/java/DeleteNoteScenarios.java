@@ -1,10 +1,9 @@
 import business_objects.TextNote;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.dataProviders.NoteDataProvider;
 
-public class DeleteNote extends BaseTest {
+public class DeleteNoteScenarios extends BaseTest {
 
     @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "CreateTextNote")
     public void deleteNote(TextNote textNote) {

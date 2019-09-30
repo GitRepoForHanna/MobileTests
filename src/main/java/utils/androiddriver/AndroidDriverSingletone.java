@@ -1,6 +1,5 @@
 package utils.androiddriver;
 
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -45,7 +44,7 @@ public class AndroidDriverSingletone {
         return instance;
     }
 
-    public AndroidDriver<MobileElement> getDriverInstance() {
+    public AndroidDriver getDriverInstance() {
         if(null == driver) {
             initDriver();
         }

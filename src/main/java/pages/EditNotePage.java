@@ -3,10 +3,9 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.androiddriver.AndroidDriverSingletone;
 import utils.wait.Wait;
 
-public class EditNotePage {
+public class EditNotePage extends BasePage{
 
     @FindBy(id = "com.socialnmobile.dictapps.notepad.color.note:id/back_btn")
     private WebElement backButton;
@@ -24,7 +23,7 @@ public class EditNotePage {
     private WebElement viewNote;
 
     public EditNotePage() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(getAndroidDriver(), this);
     }
 
     public void clickBackButton() {
@@ -46,5 +45,4 @@ public class EditNotePage {
         Wait.waitUntilParticularState(titleInput::isDisplayed);
         return titleInput.getText();
     }
-
 }

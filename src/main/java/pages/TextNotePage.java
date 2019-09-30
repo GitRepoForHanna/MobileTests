@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.androiddriver.AndroidDriverSingletone;
 import utils.wait.Wait;
 
 import java.util.Arrays;
@@ -20,17 +19,17 @@ public class TextNotePage extends NotePage {
     private WebElement bodyInput;
 
     public TextNotePage() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(getAndroidDriver(), this);
     }
 
     public void setBody(String body) {
         Wait.waitUntilParticularState(bodyInput::isDisplayed);
-        new Actions(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance()).sendKeys(bodyInput, body).perform();
-        Logger.getLogger(TextNotePage.class).info("Set Body");
+        new Actions(getAndroidDriver()).sendKeys(bodyInput, body).perform();
+        Logger.getLogger(TextNotePage.class).info(String.format("Set Body '%s'", body));
     }
 
     public void pressKey(Keys key) {
-        new Actions(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance()).sendKeys(bodyInput, key).perform();
+        new Actions(getAndroidDriver()).sendKeys(bodyInput, key).perform();
     }
 
     public List<String> getBody() {

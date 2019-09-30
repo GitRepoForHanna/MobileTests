@@ -39,7 +39,7 @@ public class HomePage extends BasePage {
 
 
     public HomePage() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(getAndroidDriver(), this);
     }
 
     public void clickNewNoteButton() {
@@ -91,5 +91,4 @@ public class HomePage extends BasePage {
                 .release()
                 .perform();
     }
-
 }

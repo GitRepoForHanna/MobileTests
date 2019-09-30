@@ -4,7 +4,7 @@ import utils.androiddriver.AndroidDriverSingletone;
 import utils.dataProviders.NoteDataProvider;
 
 
-public class CreateNewNote extends BaseTest{
+public class CreateNewNoteScenarios extends BaseTest{
 
     @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "CreateNewNote")
     public void createNewNote(Note note) {
