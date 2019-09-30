@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.NoteUtils;
+import utils.elements.ElementUtils;
 import utils.wait.Wait;
 
 public class NotePage extends BasePage {
@@ -54,9 +55,9 @@ public class NotePage extends BasePage {
         String difference = NoteUtils.updateNoteData(previousTitle, newTitle);
         int indexToInsert = newTitle.indexOf(difference);
         if ((indexToInsert == 0)) {
-            putCursorToStart(titleInput);
+            ElementUtils.putCursorToStart(titleInput);
         } else {
-            putCursorToEnd(titleInput);
+            ElementUtils.putCursorToEnd(titleInput);
         }
         new Actions(getAndroidDriver()).sendKeys(difference).perform();
         Logger.getLogger(NotePage.class).info(String.format("Title is updated with '%s' string", difference));
