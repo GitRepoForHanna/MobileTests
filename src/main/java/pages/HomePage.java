@@ -48,6 +48,10 @@ public class HomePage extends BasePage {
         newNoteButton.click();
     }
 
+    public void waitNewNoteButtonEnabled() {
+        Wait.waitUntilParticularState(() -> newNoteButton.isEnabled());
+    }
+
     public void clickNewNoteImage() {
         Wait.waitUntilParticularState(() -> addNoteImage.isDisplayed());
         addNoteImage.click();

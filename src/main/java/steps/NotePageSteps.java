@@ -55,6 +55,10 @@ public class NotePageSteps extends BasePage {
         new NotePage().setTitle(note.getName());
     }
 
+    public void setTitle(String title) {
+        new NotePage().setTitle(title);
+    }
+
     public String getNoteTitle() {
         return new NotePage().getTitle();
     }

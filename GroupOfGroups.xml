@@ -1,0 +1,36 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ColorNotes" annotations="JDK">
+
+    <test name="ColorNotes">
+        <groups>
+            <define name="NoteEditing">
+                <include name="Creation"/>
+                <include name="Editing"/>
+                <include name="Deletion"/>
+            </define>
+            <define name="TouchActions">
+                <include name="Swiping"/>
+            </define>
+            <run>
+                <include name="NoteEditing"/>
+                <exclude name="TouchActions"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="CreateNewNoteScenarios"/>
+
+            <class name="EditingNotesScenarios"/>
+            <class name="UndoRedoScenarios"/>
+
+            <class name="DeleteNoteScenarios"/>
+
+            <class name="ParameterInXML">
+                <parameter name="noteTitle" value="Cities to visit"></parameter>
+                <parameter name="checkListItems" value="Lvov,Kiev,Tallin"></parameter>
+            </class>
+
+            <class name="SwipeScenarios"/>
+        </classes>
+    </test>
+</suite>

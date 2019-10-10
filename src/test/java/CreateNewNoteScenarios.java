@@ -6,7 +6,7 @@ import utils.dataProviders.NoteDataProvider;
 
 public class CreateNewNoteScenarios extends BaseTest{
 
-    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "CreateNewNote")
+    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "CreateNewNote", groups = "Creation")
     public void createNewNote(Note note) {
         baseEmulatorPageSteps.clickAllowAccess();
         baseEmulatorPageSteps.clickSkipButton();

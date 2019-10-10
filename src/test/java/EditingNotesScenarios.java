@@ -7,7 +7,7 @@ import utils.dataProviders.NoteDataProvider;
 
 public class EditingNotesScenarios extends BaseTest{
 
-    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "EditNoteTitle")
+    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "EditNoteTitle", groups = "Editing")
     public void changeNoteTitle(Note editedNote, Note desiredNote) {
         SoftAssert softAssert = new SoftAssert();
         String oldTitle = editedNote.getName();
@@ -38,7 +38,7 @@ public class EditingNotesScenarios extends BaseTest{
         AndroidDriverSingletone.getSingletoneInstance().resetApp();
     }
 
-    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "UpdateNoteTitle")
+    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "UpdateNoteTitle", groups = "Editing")
     public void updateNoteTitle(Note editedNote, Note desiredNote) {
         SoftAssert softAssert = new SoftAssert();
         String oldTitle = editedNote.getName();

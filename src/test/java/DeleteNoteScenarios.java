@@ -5,7 +5,7 @@ import utils.dataProviders.NoteDataProvider;
 
 public class DeleteNoteScenarios extends BaseTest {
 
-    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "CreateTextNote")
+    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "CreateTextNote", groups = "Deletion")
     public void deleteNote(TextNote textNote) {
         SoftAssert softAssert = new SoftAssert();
         baseEmulatorPageSteps.preparationActivities();

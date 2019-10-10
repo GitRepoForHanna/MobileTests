@@ -31,5 +31,4 @@ public class Wait {
         waitUntilParticularState(state, TIMEOUT, POLLING_TIME);
     }
 
-
 }
