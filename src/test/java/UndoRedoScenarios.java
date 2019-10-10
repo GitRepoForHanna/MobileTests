@@ -3,7 +3,6 @@ import org.hamcrest.MatcherAssert;
 import org.testng.annotations.Test;
 import utils.androiddriver.AndroidDriverSingletone;
 import utils.dataProviders.NoteDataProvider;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +11,8 @@ import static org.hamcrest.Matchers.is;
 
 public class UndoRedoScenarios extends BaseTest {
 
-    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "Note_Editing")
-    public void undoAndRedoChanges(Note note) {
+    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "Note_Editing", groups = "Editing")
+    public void testSettingNoteBody(Note note) {
         baseEmulatorPageSteps.preparationActivities();
         homePageSteps.clickNewNoteButton();
         noteTypePopupSteps.selectNoteType(note.getType());
@@ -32,8 +31,8 @@ public class UndoRedoScenarios extends BaseTest {
         AndroidDriverSingletone.getSingletoneInstance().resetApp();
     }
 
-    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "AppendingToNote")
-    public void appendCheckListNote(Note note, Note noteToAdd) {
+    @Test(dataProviderClass = NoteDataProvider.class, dataProvider = "AppendingToNote", groups = "Editing")
+    public void testAppendingToNote(Note note, Note noteToAdd) {
         baseEmulatorPageSteps.preparationActivities();
         homePageSteps.clickNewNoteButton();
         noteTypePopupSteps.selectNoteType(note.getType());
@@ -56,6 +55,5 @@ public class UndoRedoScenarios extends BaseTest {
                 notePageSteps.getNoteBody(note), is(expectedNoteContent));
         AndroidDriverSingletone.getSingletoneInstance().resetApp();
     }
-
 }
 

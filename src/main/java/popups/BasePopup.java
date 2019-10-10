@@ -1,13 +1,13 @@
 package popups;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.androiddriver.AndroidDriverSingletone;
+import pages.BasePage;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
-public class BasePopup {
+public class BasePopup extends BasePage {
 
     private static final String PARENT_PANEL_ID = "android:id/parentPanel";
 
@@ -24,7 +24,7 @@ public class BasePopup {
     private WebElement okButton;
 
     public BasePopup() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public void clickCancelButton() {
@@ -38,6 +38,6 @@ public class BasePopup {
     }
 
     public boolean isDisplayed() {
-        return (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(PARENT_PANEL_ID)).size() != 0) && parentPanel.isDisplayed();
+        return (findElementsById(PARENT_PANEL_ID).size() != 0) && parentPanel.isDisplayed();
     }
 }

@@ -3,10 +3,10 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.androiddriver.AndroidDriverSingletone;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
-public class BaseEmulatorPage {
+public class BaseEmulatorPage extends BasePage{
 
     @FindBy(id = "com.android.packageinstaller:id/permission_allow_button")
     private WebElement allowAccessButton;
@@ -14,7 +14,7 @@ public class BaseEmulatorPage {
     private WebElement skipButton;
 
     public BaseEmulatorPage() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public void clickAllowAccess() {

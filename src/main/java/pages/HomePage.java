@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.androiddriver.AndroidDriverSingletone;
+import utils.androiddriver.DriverUtils;
 import utils.elements.ElementUtils;
 import utils.wait.Wait;
 
@@ -39,12 +40,16 @@ public class HomePage extends BasePage {
 
 
     public HomePage() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public void clickNewNoteButton() {
         Wait.waitUntilParticularState(() -> newNoteButton.isDisplayed());
         newNoteButton.click();
+    }
+
+    public void waitNewNoteButtonEnabled() {
+        Wait.waitUntilParticularState(() -> newNoteButton.isEnabled());
     }
 
     public void clickNewNoteImage() {
@@ -91,5 +96,4 @@ public class HomePage extends BasePage {
                 .release()
                 .perform();
     }
-
 }

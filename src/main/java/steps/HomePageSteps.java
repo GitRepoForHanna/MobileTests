@@ -3,6 +3,8 @@ package steps;
 import org.apache.log4j.Logger;
 import pages.BottomMenuPage;
 import pages.HomePage;
+import utils.actions.SwipeDirection;
+import utils.actions.TouchActionUtils;
 
 public class HomePageSteps extends BaseSteps {
 
@@ -63,5 +65,21 @@ public class HomePageSteps extends BaseSteps {
         homePage.clickAndHoldNoteWithText(noteTitle);
         clickDeleteInBottomMenu();
         clickOkButton();
+    }
+
+    public void swipeScreenToLeft() {
+        TouchActionUtils.swipe(SwipeDirection.LEFT);
+    }
+
+    public void swipeScreenToRight() {
+        TouchActionUtils.swipe(SwipeDirection.RIGHT);
+    }
+
+    public void swipeScreenToTop() {
+        TouchActionUtils.swipe(SwipeDirection.TOP);
+    }
+
+    public void swipeScreenToBottom() {
+        TouchActionUtils.swipe(SwipeDirection.BOTTOM);
     }
 }

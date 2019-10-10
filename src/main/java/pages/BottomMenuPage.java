@@ -1,10 +1,9 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.androiddriver.AndroidDriverSingletone;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
 public class BottomMenuPage extends BasePage {
@@ -30,11 +29,11 @@ public class BottomMenuPage extends BasePage {
     private WebElement moreButton;
 
     public BottomMenuPage() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public boolean isDisplayed() {
-        return (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(BOTTOM_MENU_ID)).size() != 0) && bottomMenu.isDisplayed();
+        return (findElementsById(BOTTOM_MENU_ID).size() != 0) && bottomMenu.isDisplayed();
     }
 
     public void clickArchiveButton() {

@@ -1,12 +1,11 @@
 package popups;
 
 import business_objects.Color;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.BasePage;
-import utils.androiddriver.AndroidDriverSingletone;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
 public class ColorPopup extends BasePage {
@@ -17,11 +16,11 @@ public class ColorPopup extends BasePage {
     private static final String COLOR_BUTTON_ID = "com.socialnmobile.dictapps.notepad.color.note:id/btn1";
 
     public ColorPopup() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     private WebElement getColorButton(Color color) {
-        return AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElement(By.id(color.getColorButtonId()));
+        return findElementById(color.getColorButtonId());
     }
 
     public void clickColorButton(Color color) {
@@ -31,7 +30,7 @@ public class ColorPopup extends BasePage {
     }
 
     public boolean isPopupDisplayed() {
-        return (AndroidDriverSingletone.getSingletoneInstance().getDriverInstance().findElements(By.id(COLOR_BUTTON_ID)).size() != 0) && colorButton.isDisplayed();
+        return (findElementsById(COLOR_BUTTON_ID).size() != 0) && colorButton.isDisplayed();
     }
 
     public void setColor(Color color) {

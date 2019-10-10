@@ -1,10 +1,13 @@
 package pages;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.androiddriver.AndroidDriverSingletone;
+import utils.NoteUtils;
+import utils.androiddriver.DriverUtils;
+import utils.elements.ElementUtils;
 import utils.wait.Wait;
 
 public class NotePage extends BasePage {
@@ -28,7 +31,7 @@ public class NotePage extends BasePage {
     protected WebElement redoButton;
 
     public NotePage() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public void setTitle(String title) {
@@ -41,6 +44,28 @@ public class NotePage extends BasePage {
         Wait.waitUntilParticularState(titleInput::isEnabled);
         titleInput.clear();
         Logger.getLogger(NotePage.class).info("Note title is cleared");
+    }
+
+    public String getTitle() {
+        Wait.waitUntilParticularState(titleInput::isEnabled);
+        return titleInput.getText();
+    }
+
+    public void updateTitle(String previousTitle, String newTitle) {
+        Wait.waitUntilParticularState(titleInput::isEnabled);
+        String difference = NoteUtils.getDifferenceBetweenNoteData(previousTitle, newTitle);
+        int indexToInsert = newTitle.toLowerCase().indexOf(difference);
+        if ((indexToInsert == 0)) {
+            ElementUtils.placeCursorToBeginningOfInput(titleInput);
+            ElementUtils.pressKey(titleInput, Keys.DELETE);
+            DriverUtils.getActions().sendKeys(previousTitle.substring(0, 1).toLowerCase()).perform();
+            ElementUtils.pressKey(titleInput, Keys.ARROW_LEFT);
+            difference = difference.substring(0, 1).toUpperCase() + difference.substring(1);
+        } else {
+            ElementUtils.placeCursorToEndOfInput(titleInput);
+        }
+        DriverUtils.getActions().sendKeys(difference).perform();
+        Logger.getLogger(NotePage.class).info(String.format("Title is updated with '%s' string", difference));
     }
 
     public void clickSaveButton() {

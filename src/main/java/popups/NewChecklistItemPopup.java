@@ -3,7 +3,7 @@ package popups;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.androiddriver.AndroidDriverSingletone;
+import utils.androiddriver.DriverUtils;
 import utils.wait.Wait;
 
 public class NewChecklistItemPopup extends BasePopup {
@@ -15,7 +15,7 @@ public class NewChecklistItemPopup extends BasePopup {
     private WebElement nextButton;
 
     public NewChecklistItemPopup() {
-        PageFactory.initElements(AndroidDriverSingletone.getSingletoneInstance().getDriverInstance(), this);
+        PageFactory.initElements(DriverUtils.getAndroidDriver(), this);
     }
 
     public void setItemBody(String body) {

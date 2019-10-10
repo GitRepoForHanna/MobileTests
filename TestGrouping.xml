@@ -1,0 +1,43 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ColorNotes_Grouping" annotations="JDK" >
+
+    <groups>
+        <run>
+            <include name="Creation"/>
+            <exclude name="Swiping"/>
+        </run>
+    </groups>
+
+        <test name="NoteCreation">
+            <classes>
+                <class name="CreateNewNoteScenarios"/>
+            </classes>
+        </test>
+
+        <test name="NoteEditing">
+            <classes>
+                <class name="EditingNotesScenarios"/>
+                <class name="UndoRedoScenarios"/>
+            </classes>
+        </test>
+
+        <test name="NoteDeletion">
+            <classes>
+                <class name="DeleteNoteScenarios"/>
+            </classes>
+        </test>
+
+    <test name="XMLParameter">
+        <parameter name="noteTitle" value="Cities to visit"></parameter>
+        <parameter name="checkListItems" value="Lvov,Kiev,Tallin"></parameter>
+        <classes>
+            <class name="ParameterInXML"/>
+        </classes>
+    </test>
+
+    <test name="Swiping">
+        <classes>
+            <class name="SwipeScenarios"/>
+        </classes>
+    </test>
+</suite>

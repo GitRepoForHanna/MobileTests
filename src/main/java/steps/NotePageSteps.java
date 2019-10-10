@@ -55,10 +55,25 @@ public class NotePageSteps extends BasePage {
         new NotePage().setTitle(note.getName());
     }
 
-    public void updateTitle(Note note) {
+    public void setTitle(String title) {
+        new NotePage().setTitle(title);
+    }
+
+    public String getNoteTitle() {
+        return new NotePage().getTitle();
+    }
+
+    public void changeTitle(Note note) {
         NotePage notePage = new NotePage();
         notePage.clearTitle();
         notePage.setTitle(note.getName());
+    }
+
+    public void updateTitle(Note note) {
+        NotePage notePage = new NotePage();
+        String currentTitle = getNoteTitle();
+        String newTitle = note.getName();
+        notePage.updateTitle(currentTitle, newTitle);
     }
 
     public void clickColorButton() {
